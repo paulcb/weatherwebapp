@@ -1,27 +1,35 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p>{{lat}}, {{lon}}</p>
-    <p>{{temp}}</p>
+    <p>Location {{lat}}, {{lon}}</p>
+    <p>Currently: {{temp}} f</p>
     <ol>
+      <li>
+        <p>Day:</p>
+        <p>High:</p>
+        <p>Low:</p>
+      </li>
       <li v-for="(value, name) in daily.data" v-bind:key="name">
         <p>{{day[new Date( value.temperatureHighTime * 1000).getDay()]}}</p>
-        <p>High {{ value.temperatureHigh }}</p>
-        <p>Low {{ value.temperatureLow }}</p>
+        <p>{{ value.temperatureHigh }}</p>
+        <p>{{ value.temperatureLow }}</p>
       </li>
     </ol>
-    <line-chart :chartdata="chartData" :options="chartOptions" />
+    <!-- <LineChart :chartdata="chartData" :options="chartOptions" /> -->
+    <simple-line-chart :chart-data="datacollection" />
     <p>bottom</p>
   </div>
 </template>
 
 <script>
 import weather from "../assets/weather.json"
-import LineChart from './LineChart.vue'
+// import LineChart from './LineChart.vue'
+import SimpleLineChart from './SimpleLineChart.vue'
 
 export default {
   components: {
-    LineChart
+    // LineChart
+    SimpleLineChart,
   },
   name: "HelloWorld",
   props: {
